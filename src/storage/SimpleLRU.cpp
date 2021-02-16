@@ -72,7 +72,6 @@ bool SimpleLRU::Put(const std::string &key, const std::string &value) {
         cur_node.get().value = value;
         this->_cur_free -= need_space;
     } else {
-        //        std::cerr << "KEY NOT IN MAP" << std::endl;
         size_t need_space = (key.size() + value.size());
         free_queue_space(need_space);
         auto new_node = std::unique_ptr<lru_node>(new lru_node(key, value));
@@ -138,8 +137,7 @@ bool SimpleLRU::Get(const std::string &key, std::string &value) {
         return false;
     }
     value = node_it->second.get().value;
-    bool hitted = this->Put(key, value);
-    return hitted;
+    return this->Put(key, value);
 }
 
 } // namespace Backend
