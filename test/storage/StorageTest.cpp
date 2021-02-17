@@ -168,17 +168,17 @@ TEST(StorageTest, BigTest) {
 
 TEST(StorageTest, MaxTest) {
     const size_t length = 20;
-    SimpleLRU storage(2 * 10 * length);
+    SimpleLRU storage(2 * 1000 * length);
 
     std::stringstream ss;
 
-    for (long i = 0; i < 11; ++i) {
+    for (long i = 0; i < 1100; ++i) {
         auto key = pad_space("Key " + std::to_string(i), length);
         auto val = pad_space("Val " + std::to_string(i), length);
         EXPECT_TRUE(storage.Put(key, val));
     }
 
-    for (long i = 1; i < 11; ++i) {
+    for (long i = 100; i < 1100; ++i) {
         auto key = pad_space("Key " + std::to_string(i), length);
         auto val = pad_space("Val " + std::to_string(i), length);
 
@@ -188,7 +188,7 @@ TEST(StorageTest, MaxTest) {
         EXPECT_TRUE(val == res);
     }
 
-    for (long i = 0; i < 1; ++i) {
+    for (long i = 0; i < 100; ++i) {
         auto key = pad_space("Key " + std::to_string(i), length);
 
         std::string res;
